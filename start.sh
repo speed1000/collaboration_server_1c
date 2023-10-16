@@ -16,6 +16,5 @@ sudo /opt/1C/1CE/components/1c-enterprise-ring-0.19.5+12-x86_64/ring elasticsear
 sudo /opt/1C/1CE/components/1c-enterprise-ring-0.19.5+12-x86_64/ring cs --instance cs_instance service start
 
 echo "ALL START"
-#while true; do sleep 600; done;
 sleep 10
 sudo tail -n 1000 -f /var/cs/cs_instance/logs/server.log
