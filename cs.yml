@@ -1,0 +1,50 @@
+version: "3.6"
+services:
+  db:
+    image: postgres:15-alpine3.17
+    environment:
+      POSTGRES_DB: cs_db
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+      PGDATA: "/var/lib/postgresql/data/pgdata"
+    volumes:
+      - postgresql_data:/var/lib/postgresql/data
+    networks:
+      - net
+    deploy:
+      placement:
+        constraints:
+          - node.role == worker 
+
+  cs:
+    image: 192.168.173.50:5000/collaboration_server_1c_new:latest
+    ports:
+    - 9094:9094
+    volumes:
+      - postgresql_data:/var/lib/postgresql/data
+    environment:
+      POSTGRES_HOST: db:5432
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+      CS_PORT: 9094
+
+    networks:
+      - net
+    command: ./start.sh
+    restart: unless-stopped
+    deploy:
+      placement:
+        constraints:
+          - node.role == worker 
+     
+networks:
+  net:
+    driver: overlay
+
+volumes:
+  postgresql_data:
+    driver: local
+    driver_opts:
+        type: nfs
+        o: addr=192.168.173.200,nolock,soft,rw
+        device: ":/mnt/volumes/collaboration_server_1c/postgresql_data"
