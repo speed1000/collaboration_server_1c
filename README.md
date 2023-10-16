@@ -19,7 +19,7 @@ https://nizamov.school/ustanovka-servera-vzaimodejstviya-1s-v-docker/
   ```
   sh build.sh
   ```
-6. Развернуть и запустить стек из cs.yml.
+6. Развернуть и запустить стек из cs.yml. Предварительно нужно изменить раположение volume postgresql_data.
 7. Зайти в контейнер db и выполнить:
   ```
   su postgres
