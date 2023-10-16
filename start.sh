@@ -15,9 +15,6 @@ sudo /opt/1C/1CE/components/1c-enterprise-ring-0.19.5+12-x86_64/ring hazelcast -
 sudo /opt/1C/1CE/components/1c-enterprise-ring-0.19.5+12-x86_64/ring elasticsearch --instance elastic_instance service start
 sudo /opt/1C/1CE/components/1c-enterprise-ring-0.19.5+12-x86_64/ring cs --instance cs_instance service start
 
-#sudo firewall-cmd --zone=public --add-port=$CS_PORT/tcp --permanent
-#sudo firewall-cmd --reload
-
 echo "ALL START"
 #while true; do sleep 600; done;
 sleep 10
