@@ -3,8 +3,11 @@
 
 ## Источники
 https://its.1c.ru/db/v8311doc/content/232/hdoc
+
 https://its.1c.ru/db/metod8dev/content/5988/hdoc
+
 https://github.com/asdaru/collaboration_server_1c
+
 https://nizamov.school/ustanovka-servera-vzaimodejstviya-1s-v-docker/
 
 ## Запуск
@@ -16,8 +19,17 @@ https://nizamov.school/ustanovka-servera-vzaimodejstviya-1s-v-docker/
   ```
   sh build.sh
   ```
-6. Равзернуть стек из cs.yml.
-7. Зайти в контейнер с postgres и выполнить:
+6. Равзернуть и запустить стек из cs.yml.
+7. Зайти в контейнер db и выполнить:
   ```
-  sh build.sh
-  ```   
+  su postgres
+  psql
+  \c cs_db
+  CREATE EXTENSION IF NOT EXISTS "uuid-ossp";
+  \q
+  ```
+8. Зайти в контейнер cs и выполннить:
+  ```
+   curl -Sf -X POST -H "Content-Type: application/json" -d "{ \"url\" : \"jdbc:postgresql://db:5432/cs_db\", \"username\" : \"postgres\", \"password\" : \"postgres\", \"enabled\" : true }" -u admin:admin http://localhost:8087/admin/bucket_server
+  ```
+9. Перезапустить и проверить, чтол логи впорядке. По умолчанию выводятся из /var/cs/cs_instance/logs/server.log, так как основные проблемы появляются там.
