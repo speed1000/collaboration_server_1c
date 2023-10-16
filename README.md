@@ -19,7 +19,7 @@ https://nizamov.school/ustanovka-servera-vzaimodejstviya-1s-v-docker/
   ```
   sh build.sh
   ```
-6. Равзернуть и запустить стек из cs.yml.
+6. Развернуть и запустить стек из cs.yml.
 7. Зайти в контейнер db и выполнить:
   ```
   su postgres
@@ -32,4 +32,4 @@ https://nizamov.school/ustanovka-servera-vzaimodejstviya-1s-v-docker/
   ```
    curl -Sf -X POST -H "Content-Type: application/json" -d "{ \"url\" : \"jdbc:postgresql://db:5432/cs_db\", \"username\" : \"postgres\", \"password\" : \"postgres\", \"enabled\" : true }" -u admin:admin http://localhost:8087/admin/bucket_server
   ```
-9. Перезапустить и проверить, чтол логи впорядке. По умолчанию выводятся из /var/cs/cs_instance/logs/server.log, так как основные проблемы появляются там.
+9. Перезапустить и проверить, что логи впорядке. По умолчанию выводятся из /var/cs/cs_instance/logs/server.log, так как основные проблемы появляются там.
